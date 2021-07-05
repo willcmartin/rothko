@@ -16,8 +16,10 @@ class Token():
 def lexer(c):
     if c in " \n":
         return None
-    elif c == '=':
-        return Token("OP", '=')
+    elif c in "+-=":
+        return Token("OPERATOR", c)
+    elif c in ";":
+        return Token("SEPERATOR", c)
     elif re.match("[_a-zA-Z]", c):
         return Token("ID", c)
     elif re.match("[.0-9]", c):
@@ -26,16 +28,16 @@ def lexer(c):
         raise Exception(c + " is not allowed. Be less dumb.")
 
 
-if __name__ == '__main__':
-    tokens = []
-
-    with open(sys.argv[1]) as rk_file:
-        input = rk_file.read()
-
-    for char in input:
-        t = lexer(char)
-        if t is not None:
-            tokens.append(lexer(char))
-
-    for t in tokens:
-        t.write()
+# if __name__ == '__main__':
+#     tokens = []
+#
+#     with open(sys.argv[1]) as rk_file:
+#         input = rk_file.read()
+#
+#     for char in input:
+#         t = lexer(char)
+#         if t is not None:
+#             tokens.append(lexer(char))
+#
+#     for t in tokens:
+#         t.write()

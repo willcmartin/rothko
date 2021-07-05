@@ -19,7 +19,7 @@ A simple language
 
 ## Notes:
 
-rothko code file -> lexer -> parser -> compiler/interpreter
+rothko code file -> lexer -> parser -> evaluator
 
 ### rothko language
 - free-form (white space doesn't matter)
