@@ -1,6 +1,7 @@
 # main
 import sys
 from lexer import lexer
+from parser import parse
 
 
 def main(rk_file):
@@ -17,12 +18,13 @@ def main(rk_file):
             tokens.append(lexer(char))
 
     for t in tokens:
-        t.write()
+        print(t)
 
     # parser
+    ast = parse(tokens)
+    print(ast)
 
-
-
+    # evaluator
 
 
 if __name__ == "__main__":

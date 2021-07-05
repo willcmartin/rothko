@@ -1,17 +1,16 @@
 # lexer for Rothko
 # python3 lexer.py test.rk
 
-# very very simple right now
-
 import sys
 import re
 
 class Token():
     def __init__(self, type, val):
         self.type = type
-        self.value = val
-    def write(self):
-        print("type: " + self.type + " value: " + self.value)
+        self.val = val
+    def __repr__(self):
+    # def write(self):
+        return "type: " + self.type + " value: " + self.val
 
 def lexer(c):
     if c in " \n":

@@ -1,6 +1,6 @@
 # Rothko
 
-A simple language
+A simple language with a simple interpreter
 
 ---
 
@@ -9,8 +9,8 @@ A simple language
 ### rothko language
 - .rk extension
 - language rules
-    - all variables are integers
-    - variables can be added
+    - all variables [a-z] are integers [0-9]
+    - end expressions with ';'
 
 ### lexer
 - written in python (eventually c)
@@ -23,13 +23,30 @@ rothko code file -> lexer -> parser -> evaluator
 
 ### rothko language
 - free-form (white space doesn't matter)
-- compiled or interpreted?
+- interpreted (maybe compiled later)
 
 ### lexer
 - input: string (source code)
 - output: list of tokens
 - token
     - things like numbers, strings, operators, punctuation, etc.
+    - ID: variable names
+    - OPERATOR: +-=
+    - INT: integer [0-9]
+    - SEPERATOR: ;
+
+### parser
+- input: list of tokens
+- output: abstract syntax tree (ast)
+- expression types:
+    - assignment
+    - operation
+    - function (TODO)
+- expressions could be held as strings in tuple or as individual classes
+- return list of ast
+
+### evaluator
+- fancy stuff
 
 ---
 
@@ -39,3 +56,5 @@ rothko code file -> lexer -> parser -> evaluator
 - https://www.freecodecamp.org/news/the-programming-language-pipeline-91d3f449c919/
 - https://gist.github.com/eliben/5797351
 - https://github.com/Rakhyvel/TinyLang
+- https://ruslanspivak.com/lsbasi-part9/
+- https://www.jayconrod.com/posts/37/a-simple-interpreter-from-scratch-in-python-part-1
