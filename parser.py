@@ -12,10 +12,16 @@
 # a = 1 + 2;
 # (assignment, a, (operation, +, 1, 2))
 
+# class TokenStream():
+#     def __init__(self, tokens):
+#         self.tokens = tokens
+
+
+
 class Parser:
     def __init__(self, tokens):
         self.tokens = tokens
-        self.idx = 0
+        self.idx = -1
 
     @property
     def curr_token(self):
@@ -30,15 +36,23 @@ class Parser:
 
     # recursive function
     def build_ast(self, prev_expression):
+        self.idx += 1
+        print(self.idx)
         # base case
-        if (self.next_token == None):
+        if self.curr_token.type == "SEPERATOR":
             return prev_expression
 
         # recursive step
         else:
-            print(self.curr_token.val)
-            self.idx += 1
-            return self.build_ast((prev_expression,"asd"))
+            if self.curr_token.type in ("ID", "INT"):
+                return self.build_ast(self.curr_token)
+            elif self.curr_token.type == "OPERATOR":
+                self.idx += 1
+                return self.build_ast(("operation", prev_expression, self.curr_token))
+
+            # print(self.curr_token.val)
+            # self.idx += 1
+            # return self.build_ast((prev_expression,"asd"))
 
 
 
