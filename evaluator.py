@@ -17,12 +17,16 @@ class Enviornment():
     def __repr__(self):
         return str(self.items)
 
+
 def evaluate(ast):
     env = Enviornment()
     if ast[0] == "assignment":
-        env.set(ast[2].val, evaluate(ast[3]))
+        env.set(evaluate(ast[2]), evaluate(ast[3]))
     elif ast[0] == "operation":
         if ast[1] == "+":
-            return int(ast[2].val) + int(ast[3].val)
-
+            return evaluate(ast[2]) + evaluate(ast[3])
+    elif ast[0] == "INT":
+        return int(ast[1])
+    elif ast[0] == "ID":
+        return ast[1]
     print(env)

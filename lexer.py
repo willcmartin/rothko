@@ -25,18 +25,3 @@ def lexer(c):
         return Token("INT", c)
     else:
         raise Exception(c + " is not allowed. Be less dumb.")
-
-
-# if __name__ == '__main__':
-#     tokens = []
-#
-#     with open(sys.argv[1]) as rk_file:
-#         input = rk_file.read()
-#
-#     for char in input:
-#         t = lexer(char)
-#         if t is not None:
-#             tokens.append(lexer(char))
-#
-#     for t in tokens:
-#         t.write()

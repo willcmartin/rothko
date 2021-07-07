@@ -42,7 +42,6 @@ class Parser:
     # recursive function
     def build_ast(self, prev_expression):
         self.idx += 1
-        print(self.idx)
         # base case
         if self.curr_token.type == "SEPERATOR":
             self.idx -= 1
@@ -51,7 +50,7 @@ class Parser:
         # recursive step
         else:
             if self.curr_token.type in ("ID", "INT"):
-                return self.build_ast(self.curr_token)
+                return self.build_ast((self.curr_token.type, self.curr_token.val))
             elif self.curr_token.type == "OPERATOR":
                 if self.curr_token.val == "=":
                     next_expression = self.build_ast(None)
@@ -59,6 +58,7 @@ class Parser:
                 elif self.curr_token.val == "+":
                     next_expression = self.build_ast(None)
                     return self.build_ast(("operation", "+", prev_expression, next_expression))
+
 
 def parse(tokens):
     parser = Parser(tokens)
