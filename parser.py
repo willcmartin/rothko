@@ -34,12 +34,20 @@ class Parser:
         except IndexError:
             return None
 
+    @property
+    def prev_token(self):
+        try:
+            return self.tokens[self.idx-1]
+        except IndexError:
+            return None
+
     # recursive function
     def build_ast(self, prev_expression):
         self.idx += 1
         print(self.idx)
         # base case
         if self.curr_token.type == "SEPERATOR":
+            self.idx -= 1
             return prev_expression
 
         # recursive step
@@ -47,8 +55,12 @@ class Parser:
             if self.curr_token.type in ("ID", "INT"):
                 return self.build_ast(self.curr_token)
             elif self.curr_token.type == "OPERATOR":
-                self.idx += 1
-                return self.build_ast(("operation", prev_expression, self.curr_token))
+                if self.curr_token.val == "=":
+                    next_expression = self.build_ast(None)
+                    return self.build_ast(("operation", "=", prev_expression, next_expression))
+                elif self.curr_token.val == "+":
+                    next_expression = self.build_ast(None)
+                    return self.build_ast(("operation", "+", prev_expression, next_expression))
 
             # print(self.curr_token.val)
             # self.idx += 1
