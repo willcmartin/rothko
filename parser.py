@@ -55,7 +55,7 @@ class Parser:
             elif self.curr_token.type == "OPERATOR":
                 if self.curr_token.val == "=":
                     next_expression = self.build_ast(None)
-                    return self.build_ast(("operation", "=", prev_expression, next_expression))
+                    return self.build_ast(("assignment", "=", prev_expression, next_expression))
                 elif self.curr_token.val == "+":
                     next_expression = self.build_ast(None)
                     return self.build_ast(("operation", "+", prev_expression, next_expression))

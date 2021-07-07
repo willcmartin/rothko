@@ -21,6 +21,8 @@ A simple language with a simple interpreter
 
 rothko code file -> lexer -> parser -> evaluator
 
+to run: ```python3 rothko.py test.rk```
+
 ### rothko language
 - free-form (white space doesn't matter)
 - interpreted (maybe compiled later)
@@ -39,11 +41,11 @@ rothko code file -> lexer -> parser -> evaluator
 - input: list of tokens
 - output: abstract syntax tree (ast)
 - expression types:
-    - assignment
-    - operation
+    - assignment (=)
+    - operation (+)
     - function (TODO)
 - expressions could be held as strings in tuple or as individual classes
-- return list of ast
+- return ast
 
 ### evaluator
 - fancy stuff
