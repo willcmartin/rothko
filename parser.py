@@ -16,8 +16,6 @@
 #     def __init__(self, tokens):
 #         self.tokens = tokens
 
-
-
 class Parser:
     def __init__(self, tokens):
         self.tokens = tokens
@@ -61,28 +59,6 @@ class Parser:
                 elif self.curr_token.val == "+":
                     next_expression = self.build_ast(None)
                     return self.build_ast(("operation", "+", prev_expression, next_expression))
-
-            # print(self.curr_token.val)
-            # self.idx += 1
-            # return self.build_ast((prev_expression,"asd"))
-
-
-
-
-
-
-        # print(prev)
-        # if self.iterator <= len(self.tokens):
-        #     if self.tokens[self.iterator].type == "SEPERATOR":
-        #         return prev
-        #     elif self.tokens[self.iterator].type == "ID" and self.tokens[self.iterator+1].type == "OPERATOR":
-        #         if self.tokens[self.iterator+1].val == "+":
-        #             self.iterator += 3
-        #             return self.next_expression(("operation", "+", self.tokens[self.iterator].val, self.tokens[self.iterator+2].val))
-        #         elif self.tokens[self.iterator+1].val == "=":
-        #             self.iterator += 2
-        #             return self.next_expression(("assignment", self.tokens[self.iterator].val, self.tokens[self.iterator+1].val))
-        #
 
 def parse(tokens):
     parser = Parser(tokens)
