@@ -33,7 +33,7 @@ to run: ```python3 rothko.py test.rk```
 - token
     - things like numbers, strings, operators, punctuation, etc.
     - ID: variable names
-    - OPERATOR: +-=
+    - OPERATOR: +=
     - INT: integer [0-9]
     - SEPERATOR: ;
 

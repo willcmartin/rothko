@@ -2,6 +2,7 @@
 import sys
 from lexer import lexer
 from parser import parse
+from evaluator import evaluate
 
 
 def main(rk_file):
@@ -25,6 +26,7 @@ def main(rk_file):
     print(ast)
 
     # evaluator
+    evaluate(ast)
 
 
 if __name__ == "__main__":
