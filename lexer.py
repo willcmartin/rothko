@@ -1,27 +1,29 @@
 # lexer for Rothko
-# python3 lexer.py test.rk
 
-import sys
 import re
+from stream import stream
 
 class Token():
     def __init__(self, type, val):
         self.type = type
         self.val = val
     def __repr__(self):
-    # def write(self):
         return "type: " + self.type + " value: " + self.val
 
-def lexer(c):
-    if c in " \n":
-        return None
-    elif c in "+-=":
-        return Token("OPERATOR", c)
-    elif c in ";":
-        return Token("SEPERATOR", c)
-    elif re.match("[_a-zA-Z]", c):
-        return Token("ID", c)
-    elif re.match("[.0-9]", c):
-        return Token("INT", c)
-    else:
-        raise Exception(c + " is not allowed. Be less dumb.")
+
+def lex(char_stream):
+    chars = stream(char_stream)
+    while chars.next is not None:
+        if chars.curr in " \n":
+            pass
+        elif chars.curr in "+-=":
+            yield Token("OPERATOR", chars.curr)
+        elif chars.curr in ";":
+            yield Token("SEPERATOR", chars.curr)
+        elif re.match("[_a-zA-Z]", chars.curr):
+            yield Token("ID", chars.curr)
+        elif re.match("[.0-9]", chars.curr):
+            yield Token("INT", chars.curr)
+        else:
+            yield Exception(chars.curr + " is not allowed. Be less dumb.")
+        chars.get_next()
