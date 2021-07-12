@@ -60,3 +60,28 @@ to run: ```python3 rothko.py test.rk```
 - https://github.com/Rakhyvel/TinyLang
 - https://ruslanspivak.com/lsbasi-part9/
 - https://www.jayconrod.com/posts/37/a-simple-interpreter-from-scratch-in-python-part-1
+
+
+## Example code
+```
+var = 1;
+
+print(var);
+printascii(var)
+
+loop
+    var = var + 1;
+    if (var == 3) exitloop endif;
+endloop;
+
+if (var == 1)
+    var2 = 3;
+endlif;
+```
+
+
+keywords:
+- loop (endloop) (exitloop)
+- if (endif)
+- print
+- printascii
