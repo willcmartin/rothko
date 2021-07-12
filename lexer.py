@@ -18,12 +18,25 @@ def lex(char_stream):
             pass
         elif chars.curr in "+-=":
             yield Token("OPERATOR", chars.curr)
+        elif chars.curr in "();":
+            yield Token("SEPERATOR", chars.curr)
         elif chars.curr in ";":
             yield Token("SEPERATOR", chars.curr)
         elif re.match("[_a-zA-Z]", chars.curr):
-            yield Token("ID", chars.curr)
-        elif re.match("[.0-9]", chars.curr):
-            yield Token("INT", chars.curr)
+            id = chars.curr
+            while (re.match("[_a-zA-Z0-9]", chars.next)):
+                id += chars.next
+                chars.get_next()
+            if id in ["if", "endif", "loop", "endloop", "exitloop", "print"]:
+                yield Token("KEYWORD", id)
+            else:
+                yield Token("IDENTIFIER", id)
+        elif re.match("[0-9]", chars.curr):
+            int = chars.curr
+            while (re.match("[0-9]", chars.next)):
+                int += chars.next
+                chars.get_next()
+            yield Token("INTEGER", int)
         else:
             yield Exception(chars.curr + " is not allowed. Be less dumb.")
         chars.get_next()
