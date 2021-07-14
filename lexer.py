@@ -20,8 +20,6 @@ def lex(char_stream):
             yield Token("OPERATOR", chars.curr)
         elif chars.curr in "();":
             yield Token("SEPERATOR", chars.curr)
-        elif chars.curr in ";":
-            yield Token("SEPERATOR", chars.curr)
         elif re.match("[_a-zA-Z]", chars.curr):
             id = chars.curr
             while (re.match("[_a-zA-Z0-9]", chars.next)):
