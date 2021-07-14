@@ -1,5 +1,7 @@
 # evaluator for rothko
 
+from stream import stream
+
 # enviornment with one scope for the entire program
 class Enviornment():
     def __init__(self):
@@ -18,15 +20,22 @@ class Enviornment():
         return str(self.items)
 
 
-def evaluate(ast):
-    env = Enviornment()
+def evaluate_ast(ast, env):
+    # env = Enviornment()
     if ast[0] == "assignment":
-        env.set(evaluate(ast[2]), evaluate(ast[3]))
+        env.set(evaluate_ast(ast[2], env), evaluate_ast(ast[3], env))
     elif ast[0] == "operation":
         if ast[1] == "+":
-            return evaluate(ast[2]) + evaluate(ast[3])
-    elif ast[0] == "INT":
+            return evaluate_ast(ast[2], env) + evaluate_ast(ast[3], env)
+    elif ast[0] == "INTEGER":
         return int(ast[1])
-    elif ast[0] == "ID":
+    elif ast[0] == "IDENTIFIER":
         return ast[1]
     print(env)
+
+def evaluate(ast_stream, env):
+    asts = stream(ast_stream)
+    while asts.curr is not None:
+        print(asts.curr)
+        evaluate_ast(asts.curr, env)
+        asts.get_next()

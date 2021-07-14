@@ -61,8 +61,9 @@ from stream import stream
 #                 next_expression = self.build_ast(None)
 #                 return self.build_ast(("operation", "+", prev_expression, next_expression))
 
-# should be function in parse function then don't have to pass tokens
-def build_ast_new(tokens, prev_ast, get_next=True):
+# TODO: should be function in parse function then don't have to pass tokens
+# TODO: remove get_next function?
+def build_ast(tokens, prev_ast, get_next=True):
     if get_next == True:
         tokens.get_next()
 
@@ -72,14 +73,14 @@ def build_ast_new(tokens, prev_ast, get_next=True):
     # recursive step
     else:
         if tokens.curr.type in ("IDENTIFIER", "INTEGER"):
-            return build_ast_new(tokens, tokens.curr)
+            return build_ast(tokens, [tokens.curr.type, tokens.curr.val])
         elif tokens.curr.type in ("OPERATOR"):
             if tokens.curr.val in ("="):
-                next_expression = build_ast_new(tokens, None)
-                return build_ast_new(tokens, ["assignment", "=", prev_ast, next_expression], False)
+                next_expression = build_ast(tokens, None)
+                return build_ast(tokens, ["assignment", "=", prev_ast, next_expression], False)
             if tokens.curr.val in ("+"):
-                next_expression = build_ast_new(tokens, None)
-                return build_ast_new(tokens, ["operation", "+", prev_ast, next_expression], False)
+                next_expression = build_ast(tokens, None)
+                return build_ast(tokens, ["operation", "+", prev_ast, next_expression], False)
 
 
 
@@ -87,7 +88,5 @@ def build_ast_new(tokens, prev_ast, get_next=True):
 def parse(token_stream):
     tokens = stream(token_stream)
     while tokens.curr is not None:
-        yield build_ast_new(tokens, None, False)
+        yield build_ast(tokens, None, False)
         tokens.get_next()
-    # parser = Parser(tokens)
-    # return parser.build_ast(None)
