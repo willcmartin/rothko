@@ -30,7 +30,10 @@ def evaluate_ast(ast, env):
     elif ast[0] == "INTEGER":
         return int(ast[1])
     elif ast[0] == "IDENTIFIER":
-        return ast[1]
+        if ast[1] in env.items:
+            return env.items[ast[1]]
+        else:
+            return ast[1]
     print(env)
 
 def evaluate(ast_stream, env):

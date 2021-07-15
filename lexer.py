@@ -11,30 +11,37 @@ class Token():
         return "type: " + self.type + " value: " + self.val
 
 
+def fill(re_values, chars):
+    # fill to end of token value
+    token_val = chars.curr
+    while(re.match(re_values, chars.next)):
+        token_val += chars.next
+        chars.get_next()
+    return token_val
+
 def lex(char_stream):
     chars = stream(char_stream)
+
+    # check for each type of token until end of stream
     while chars.next is not None:
         if chars.curr in " \n":
             pass
-        elif chars.curr in "+-=":
-            yield Token("OPERATOR", chars.curr)
+        elif re.match("[+=-]", chars.curr):
+            token_val = fill("[+=-]", chars)
+            if token_val in ["+", "-", "=", "=="]:
+                yield Token("OPERATOR", token_val)
         elif chars.curr in "();":
             yield Token("SEPERATOR", chars.curr)
         elif re.match("[_a-zA-Z]", chars.curr):
-            id = chars.curr
-            while (re.match("[_a-zA-Z0-9]", chars.next)):
-                id += chars.next
-                chars.get_next()
-            if id in ["if", "endif", "loop", "endloop", "exitloop", "print"]:
-                yield Token("KEYWORD", id)
+            token_val = fill("[_a-zA-Z]", chars)
+            if token_val in ["while", "endwhile", "print"]:
+                yield Token("KEYWORD", token_val)
             else:
-                yield Token("IDENTIFIER", id)
+                yield Token("IDENTIFIER", token_val)
         elif re.match("[0-9]", chars.curr):
-            int = chars.curr
-            while (re.match("[0-9]", chars.next)):
-                int += chars.next
-                chars.get_next()
-            yield Token("INTEGER", int)
+            token_val = fill("[0-9]", chars)
+            yield Token("INTEGER", token_val)
         else:
-            yield Exception(chars.curr + " is not allowed. Be less dumb.")
+            yield Exception(chars.curr + " is not allowed.")
+            
         chars.get_next()
