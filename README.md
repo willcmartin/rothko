@@ -66,29 +66,36 @@ to run: ```python3 rothko.py test.rk```
 ```
 var = 1;
 
-print(var);
-printascii(var)
-
-loop
-    var = var + 1;
-    if (var == 3) exitloop endif;
-endloop;
-
-if (var == 1)
-    var2 = 3;
-endlif;
-
-
-in_loop = 1
+in_loop = 1;
 while (in_loop == 1)
-    var = var + 1
-    in_loop = 0
+    var = var + 1;
+    in_loop = 0;
 endwhile;
+
+print(var)
 ```
 
 
-keywords:
-- loop (endloop) (exitloop)
-- if (endif)
+tokens:
+- OPERATOR
+    - + = - ==
+- SEPERATOR
+    - ; ( )
+- KEYWORD
+    - while, endwhile, print
+- IDENTIFIER
+    - var ...
+- INTEGER
+    - 0 1 2 ...
+
+asts:
+- assignment
+    - ['assignment', 1st ast, 2nd ast]
+- comparison
+    - ['comparison', condition, 1st ast, 2nd ast]
+- arithmetic
+    - ['arithmetic', OPERATOR type, 1st ast, 2nd ast]
+- loop
+    - ['loop', condition, ast]
 - print
-- printascii
+    - ['print', environment item]

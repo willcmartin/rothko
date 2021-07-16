@@ -21,7 +21,6 @@ class Enviornment():
 
 
 def evaluate_ast(ast, env):
-    # env = Enviornment()
     if ast[0] == "assignment":
         env.set(evaluate_ast(ast[2], env), evaluate_ast(ast[3], env))
     elif ast[0] == "operation":
