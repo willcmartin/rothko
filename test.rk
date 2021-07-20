@@ -1,1 +1,5 @@
-1 = 2 + 19;
+while (main == 1)
+    while (mains == 2)
+        var = 3;
+    endwhile;
+endwhile;

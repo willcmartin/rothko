@@ -11,9 +11,16 @@ def postorder(root):
         if root==None:
             return
         #traverse left subtree
-        postorder(root.left)
+        try:
+            postorder(root.left)
+        except AttributeError:
+            pass
         #traverse right subtree
-        postorder(root.right)
+        try:
+            postorder(root.right)
+        except AttributeError:
+            for child in root.children:
+                postorder(child)
         #traverse root
         print(root.data)
 
