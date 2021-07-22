@@ -28,7 +28,9 @@ def lex(char_stream):
             pass
         elif re.match("[+=-]", chars.curr):
             token_val = fill("[+=-]")
-            if token_val in ["+", "-", "=", "=="]:
+            if token_val in ["=="]:
+                yield Token("CONDITION", token_val)
+            elif token_val in ["+", "-", "="]:
                 yield Token("OPERATOR", token_val)
         elif chars.curr in "();":
             yield Token("SEPERATOR", chars.curr)

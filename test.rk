@@ -1,5 +1,7 @@
 while (main == 1)
-    while (mains == 2)
-        var = 3;
+    var = 9;
+    while (var == 9)
+        var = var + 3;
     endwhile;
+    main = main + 1;
 endwhile;
