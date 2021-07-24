@@ -1,0 +1,20 @@
+while (main==1)
+
+    terms = 10;
+    count = 0;
+    n = 0;
+    n_next = 1;
+
+    while (count < terms)
+
+        print -> n;
+
+        n_temp = n + n_next;
+        n = n_next;
+        n_next = n_temp;
+
+        count = count + 1;
+    endwhile;
+
+    main = 0;
+endwhile;
