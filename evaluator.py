@@ -52,6 +52,8 @@ def evaluate(ast, env):
                 # print(env.items["var"])
         elif ast.data.val == "print":
             print(evaluate_ast(ast.left))
+        elif ast.data.val == "printascii":
+            print(chr(evaluate_ast(ast.left)))
         elif ast.data.type == "CONDITION":
             if ast.data.val == "==":
                 return (evaluate_ast(ast.left) == evaluate_ast(ast.right))

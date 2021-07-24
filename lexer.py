@@ -38,7 +38,7 @@ def lex(char_stream):
             yield Token("SEPERATOR", chars.curr)
         elif re.match("[_a-zA-Z]", chars.curr):
             token_val = fill("[_a-zA-Z]")
-            if token_val in ["while", "endwhile", "print", "endprint"]:
+            if token_val in ["while", "endwhile", "print", "printascii"]:
                 yield Token("KEYWORD", token_val)
             else:
                 yield Token("IDENTIFIER", token_val)
