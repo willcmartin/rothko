@@ -7,11 +7,11 @@ A simple language with a simple Python interpreter
 ## Run sample program:
 
 ```bash
-    # clone repo
-    git clone https://github.com/WillMartin7/rothko.git
+# clone repo
+git clone https://github.com/WillMartin7/rothko.git
 
-    # run hello world program through interpreter
-    python3 rothko.py hello_world.rk
+# run hello world program through interpreter
+python3 rothko.py hello_world.rk
 ```
 
 ## Syntax rules:
