@@ -69,7 +69,7 @@ endwhile;
 
 ## Interpreter
 - written in Python
-- hopefully I will write a C version some day
+- hopefully I will write a C version someday
 - see [PyRothko](https://github.com/WillMartin7/rothko/tree/main/PyRothko) for details
 
 ## TODO:
