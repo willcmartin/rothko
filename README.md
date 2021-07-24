@@ -18,8 +18,8 @@ python3 PyRothko/rothko.py examples/hello_world.rk
 - free-form language
 - statements end with semicolons
 - while loops
-    - every line must be inside of a while loop to run
-    - every program is initialized with a variable main = 1
+    - statements must be inside of a while loop to run
+    - every program is initialized with a variable ```main = 1``` (for use in main loop)
     - the simplest terminating program:
     ```python
     while (main == 1)
@@ -66,6 +66,11 @@ while (main == 1)
     main = 0;
 endwhile;
 ```
+
+## Interpreter
+- written in Python
+- hopefully I will write a C version some day
+- see [PyRothko](https://github.com/WillMartin7/rothko/tree/main/PyRothko) for details
 
 ## TODO:
 - order of ops for mathematical statements
