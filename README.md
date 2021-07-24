@@ -1,6 +1,6 @@
 # Rothko
 
-A simple language with a simple Python interpreter
+A simple programming language with a simple Python interpreter
 
 ---
 
@@ -19,6 +19,7 @@ python3 rothko.py hello_world.rk
 
 ## TODO:
 - read function
+- parentheses/order of ops
 
 ## Sources:
 - https://accu.org/journals/overload/26/145/balaam_2510/
