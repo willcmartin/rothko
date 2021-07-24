@@ -48,10 +48,21 @@ def evaluate(ast, env):
         if ast.data.val == "while":
             while evaluate_ast(ast.left) == True:
                 evaluate_ast(ast.right)
-                print(env.items["main"])
-                print(env.items["var"])
+                # print(env.items["main"])
+                # print(env.items["var"])
+        elif ast.data.val == "print":
+            print(evaluate_ast(ast.left))
         elif ast.data.type == "CONDITION":
-            return (evaluate_ast(ast.left) == evaluate_ast(ast.right))
+            if ast.data.val == "==":
+                return (evaluate_ast(ast.left) == evaluate_ast(ast.right))
+            elif ast.data.val == ">":
+                return (evaluate_ast(ast.left) > evaluate_ast(ast.right))
+            elif ast.data.val == "<":
+                return (evaluate_ast(ast.left) < evaluate_ast(ast.right))
+            elif ast.data.val == ">=":
+                return (evaluate_ast(ast.left) >= evaluate_ast(ast.right))
+            elif ast.data.val == "<=":
+                return (evaluate_ast(ast.left) <= evaluate_ast(ast.right))
         elif ast.data.type == "OPERATOR":
             if ast.data.val == "=":
                 # print(evaluate_ast(ast.left))

@@ -15,7 +15,7 @@ def postorder(root):
         postorder(root.left)
     except AttributeError:
         pass
-    print(root.data)
+
     #traverse right subtree
     try:
         postorder(root.right)
@@ -23,6 +23,7 @@ def postorder(root):
         for child in root.children:
             postorder(child)
     #traverse root
+    print(root.data)
 
 
 if __name__ == "__main__":
