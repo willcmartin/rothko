@@ -1,7 +1,30 @@
 # Rothko
 
-A simple language with a simple interpreter
+A simple language with a simple Python interpreter
 
+---
+
+## Run sample program:
+
+```bash
+    # clone repo
+    git clone https://github.com/WillMartin7/rothko.git
+
+    # run hello world program through interpreter
+    python3 rothko.py hello_world.rk
+```
+
+## Syntax rules:
+- yeah there's a couple
+
+## TODO:
+- read function
+
+## Sources:
+- https://accu.org/journals/overload/26/145/balaam_2510/
+- https://ruslanspivak.com/lsbasi-part1/
+
+---
 ---
 
 ## General info:
