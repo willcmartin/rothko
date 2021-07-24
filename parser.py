@@ -17,10 +17,10 @@ class Compound():
 def parse(token_stream):
 
     def build_ast(node, left=False):
-        if tokens.curr.type in ("SEPERATOR"):
+        if tokens.curr.type in ("SEPERATOR", "FUNCTION"):
             if tokens.curr.val in (";", ")"):
                 return node
-            elif tokens.curr.val in ("("):
+            elif tokens.curr.val in ("(", "->"):
                 tokens.get_next()
                 return build_ast(node, left=True)
         else:
