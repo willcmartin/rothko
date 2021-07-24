@@ -72,7 +72,5 @@ def parse(token_stream):
     # get token stream
     tokens = stream(token_stream)
 
-    # loop over tokens
-    # while tokens.curr is not None:
+    # return ast using token stream
     return build_ast(Node(), left=True)
-        # tokens.get_next()
