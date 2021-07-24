@@ -1,0 +1,17 @@
+while (main==1)
+    printascii -> 72;
+    printascii -> 101;
+    printascii -> 108;
+    printascii -> 108;
+    printascii -> 111;
+    printascii -> 44;
+    printascii -> 32;
+    printascii -> 87;
+    printascii -> 111;
+    printascii -> 114;
+    printascii -> 108;
+    printascii -> 100;
+    printascii -> 33;
+
+    main = 0;
+endwhile;
