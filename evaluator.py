@@ -70,8 +70,14 @@ def evaluate(ast, env):
                 # print(evaluate_ast(ast.left))
                 # print(evaluate_ast(ast.right))
                 env.set(evaluate_ast(ast.left, val=False), evaluate_ast(ast.right))
-            if ast.data.val == "+":
+            elif ast.data.val == "+":
                 return int(evaluate_ast(ast.left)) + int(evaluate_ast(ast.right))
+            elif ast.data.val == "-":
+                return int(evaluate_ast(ast.left)) - int(evaluate_ast(ast.right))
+            elif ast.data.val == "*":
+                return int(evaluate_ast(ast.left)) * int(evaluate_ast(ast.right))
+            elif ast.data.val == "/":
+                return int(evaluate_ast(ast.left)) // int(evaluate_ast(ast.right))
         elif ast.data.type == "IDENTIFIER":
             if val==True:
                 return env.items[ast.data.val]

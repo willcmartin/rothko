@@ -26,11 +26,11 @@ def lex(char_stream):
 
         if chars.curr in " \n":
             pass
-        elif re.match("[+=><\-]", chars.curr):
-            token_val = fill("[+=><\-]")
+        elif re.match("[+=></*\-]", chars.curr):
+            token_val = fill("[+=></*\-]")
             if token_val in ["==", "<", ">", ">=", "<="]:
                 yield Token("CONDITION", token_val)
-            elif token_val in ["+", "-", "="]:
+            elif token_val in ["+", "-", "=", "*", "/"]:
                 yield Token("OPERATOR", token_val)
             elif token_val in ["->"]:
                 yield Token("FUNCTION", token_val)

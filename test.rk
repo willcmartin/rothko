@@ -1,8 +1,4 @@
 while (main == 1)
-    var = 0;
-    while (var <= 10)
-        var = var + 1;
-        printascii -> var+65;
-    endwhile;
+    print -> 99/100;
     main = 0;
 endwhile;

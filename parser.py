@@ -32,7 +32,7 @@ def parse(token_stream):
                 else:
                     return node
             elif tokens.curr.type in ("OPERATOR", "CONDITION"):
-                if tokens.curr.val in ("+", "-", "==", ">", "<", ">=", "<="):
+                if tokens.curr.val in ("+", "-", "==", ">", "<", ">=", "<=", "*", "/"):
                     parent_node = Node()
                     parent_node.left = node
                     parent_node.data = tokens.curr
