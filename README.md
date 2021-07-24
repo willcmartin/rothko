@@ -11,7 +11,7 @@ A simple programming language with a simple Python interpreter
 git clone https://github.com/WillMartin7/rothko.git
 
 # run hello world program through interpreter
-python3 rothko.py hello_world.rk
+python3 PyRothko/rothko.py examples/test.rk
 ```
 
 ## Syntax rules:

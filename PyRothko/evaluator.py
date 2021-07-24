@@ -53,7 +53,6 @@ def evaluate(ast, env):
                 return env.items[ast.data.val]
             else:
                 return ast.data.val
-
         elif ast.data.type == "INTEGER":
             return int(ast.data.val)
         elif ast.data.type == "COMPOUND":
