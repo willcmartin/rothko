@@ -1,6 +1,6 @@
 while (main==1)
 
-    terms = 10;
+    read -> terms;
     count = 0;
     n = 0;
     n_next = 1;

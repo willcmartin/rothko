@@ -1,4 +1,5 @@
 while (main == 1)
-    print -> 99/100;
+    read -> var;
+    print -> var;
     main = 0;
 endwhile;

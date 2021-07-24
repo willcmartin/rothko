@@ -48,11 +48,12 @@ def evaluate(ast, env):
         if ast.data.val == "while":
             while evaluate_ast(ast.left) == True:
                 evaluate_ast(ast.right)
-                # print(env.items["main"])
-                # print(env.items["var"])
         elif ast.data.val == "print":
             print(evaluate_ast(ast.left))
         elif ast.data.val == "printascii":
+            print(chr(evaluate_ast(ast.left)))
+        elif ast.data.val == "read":
+            env.set(evaluate_ast(ast.left, val=False), int(input()))
             print(chr(evaluate_ast(ast.left)))
         elif ast.data.type == "CONDITION":
             if ast.data.val == "==":
@@ -67,8 +68,6 @@ def evaluate(ast, env):
                 return (evaluate_ast(ast.left) <= evaluate_ast(ast.right))
         elif ast.data.type == "OPERATOR":
             if ast.data.val == "=":
-                # print(evaluate_ast(ast.left))
-                # print(evaluate_ast(ast.right))
                 env.set(evaluate_ast(ast.left, val=False), evaluate_ast(ast.right))
             elif ast.data.val == "+":
                 return int(evaluate_ast(ast.left)) + int(evaluate_ast(ast.right))

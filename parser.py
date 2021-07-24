@@ -57,7 +57,7 @@ def parse(token_stream):
                         node.right.children.append(build_ast(Node(), left=True))
                         tokens.get_next()
                     return build_ast(node)
-                elif tokens.curr.val in ("print", "printascii"):
+                elif tokens.curr.val in ("print", "printascii", "read"):
                     node.data = tokens.curr
                     tokens.get_next()
                     node.left = build_ast(Node())
