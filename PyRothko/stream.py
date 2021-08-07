@@ -1,4 +1,8 @@
-# generator -> stream with next and curr attributes
+"""
+PyRothko stream class
+
+convert a generator to a stream with next and curr attributes
+"""
 
 class stream():
     def __init__(self, generator):

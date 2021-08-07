@@ -1,4 +1,6 @@
-# generator for character stream
+"""
+PyRothko character generator
+"""
 
 def read_file(rk_file):
     with open(rk_file, encoding="ascii") as r:

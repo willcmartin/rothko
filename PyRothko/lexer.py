@@ -1,5 +1,20 @@
+"""
+PyRothko lexer
+
+returns a generator of tokens
+
+token types:
+    IDENTIFIER: any variable name
+    CONDITION: ==, <, >, >=, <=
+    OPERATOR: +, -, =, *, /
+    KEYWORD: while, endwhile, print, printascii, read
+    SEPERATOR: (, ), ;, ->
+    INTEGER: any integer value
+"""
+
 import re
 from stream import stream
+
 
 class Token():
     def __init__(self, type, val):
@@ -33,7 +48,7 @@ def lex(char_stream):
             elif token_val in ["+", "-", "=", "*", "/"]:
                 yield Token("OPERATOR", token_val)
             elif token_val in ["->"]:
-                yield Token("FUNCTION", token_val)
+                yield Token("SEPERATOR", token_val)
         elif chars.curr in "();":
             yield Token("SEPERATOR", chars.curr)
         elif re.match("[_a-zA-Z]", chars.curr):
