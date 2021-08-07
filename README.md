@@ -20,7 +20,7 @@ python3 PyRothko/rothko.py examples/hello_world.rk
 - while loops
     - statements must be inside of a while loop to run
     - every program is initialized with a variable ```main = 1``` (for use in main loop)
-    - the simplest terminating program:
+    - the simplest, terminating program:
     ```python
     while (main == 1)
         main = 0;
@@ -29,13 +29,13 @@ python3 PyRothko/rothko.py examples/hello_world.rk
 - conditions are surrounded by parentheses (as seen above in while loop)
 - variables
     - all variables are integers
-    - variable names must be string of alphabetical characters and underscores
+    - variable names must be a string of alphabetical characters and underscores
     - declaring a variable:
     ```python
     var = 1;
     ```
 - built-in functions
-    - read and print
+    - read, print, and printascii
     - called with ```->``` operator
     - example:
     ```python
@@ -67,7 +67,7 @@ while (main == 1)
 endwhile;
 ```
 
-## Interpreter
+## Interpreter:
 - written in Python
 - hopefully I will write a C version someday
 - see [PyRothko](https://github.com/WillMartin7/rothko/tree/main/PyRothko) for details
