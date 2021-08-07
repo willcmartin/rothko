@@ -69,11 +69,12 @@ endwhile;
 
 ## Interpreter:
 - written in Python
-- hopefully I will write a C version someday
 - see [PyRothko](https://github.com/WillMartin7/rothko/tree/main/PyRothko) for details
+- hopefully I will write a C version someday
 
 ## TODO:
 - order of ops for mathematical statements
+- arrays/linked lists
 
 ## Sources:
 - https://accu.org/journals/overload/26/145/balaam_2510/
