@@ -23,51 +23,52 @@ class Compound():
 def parse(token_stream):
 
     def build_ast(node, left=False):
-        if tokens.curr.type in ("SEPERATOR"):
+        if tokens.curr.type in ["SEPERATOR"]:
             if tokens.curr.val in (";", ")"):
                 return node
             elif tokens.curr.val in ("(", "->"):
                 tokens.get_next()
                 return build_ast(node, left=True)
-        else:
-            if tokens.curr.type in ("INTEGER", "IDENTIFIER"):
+        elif tokens.curr.type in ["INTEGER", "IDENTIFIER"]:
+            node.data = tokens.curr
+            tokens.get_next()
+            if left==True:
+                return build_ast(node)
+            else:
+                return node
+        elif tokens.curr.type in ["OPERATOR", "CONDITION"]:
+            parent_node = Node()
+            parent_node.left = node
+            parent_node.data = tokens.curr
+            if tokens.curr.val in ["="]:
+                tokens.get_next()
+                parent_node.right = build_ast(Node(), left=True)
+                return build_ast(parent_node)
+            else:
+                tokens.get_next()
+                parent_node.right = build_ast(Node())
+                return build_ast(parent_node)
+        elif tokens.curr.type in ["KEYWORD"]:
+            if tokens.curr.val in ["while"]:
                 node.data = tokens.curr
                 tokens.get_next()
-                if left==True:
-                    return build_ast(node)
-                else:
-                    return node
-            elif tokens.curr.type in ("OPERATOR", "CONDITION"):
-                parent_node = Node()
-                parent_node.left = node
-                parent_node.data = tokens.curr
-                if tokens.curr.val in ("="):
+                node.left = build_ast(Node(), left=True)
+                node.right = Compound()
+                tokens.get_next()
+                while tokens.curr.val != "endwhile":
+                    node.right.children.append(build_ast(Node(), left=True))
                     tokens.get_next()
-                    parent_node.right = build_ast(Node(), left=True)
-                    return build_ast(parent_node)
-                else:
-                    tokens.get_next()
-                    parent_node.right = build_ast(Node())
-                    return build_ast(parent_node)
-            elif tokens.curr.type in ("KEYWORD"):
-                if tokens.curr.val in ("while"):
-                    node.data = tokens.curr
-                    tokens.get_next()
-                    node.left = build_ast(Node(), left=True)
-                    node.right = Compound()
-                    tokens.get_next()
-                    while tokens.curr.val != "endwhile":
-                        node.right.children.append(build_ast(Node(), left=True))
-                        tokens.get_next()
-                    return build_ast(node)
-                elif tokens.curr.val in ("print", "printascii", "read"):
-                    node.data = tokens.curr
-                    tokens.get_next()
-                    node.left = build_ast(Node())
-                    return build_ast(node)
-                elif tokens.curr.val in ("endwhile"):
-                    tokens.get_next()
-                    return build_ast(node, left=True)
+                return build_ast(node)
+            elif tokens.curr.val in ["print", "printascii", "read"]:
+                node.data = tokens.curr
+                tokens.get_next()
+                node.left = build_ast(Node())
+                return build_ast(node)
+            elif tokens.curr.val in ["endwhile"]:
+                tokens.get_next()
+                return build_ast(node, left=True)
+        else:
+            raise Exception("The token type \"" + tokens.curr.type + "\" is not allowed by the parser.")
 
     # get token stream
     tokens = stream(token_stream)

@@ -61,6 +61,6 @@ def lex(char_stream):
             token_val = fill("[0-9]")
             yield Token("INTEGER", token_val)
         else:
-            yield Exception(chars.curr + " is not allowed.")
+            raise Exception("The character \"" + chars.curr + "\" is not allowed by the lexer.")
 
         chars.get_next()

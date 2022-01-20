@@ -1,5 +1,4 @@
 while (main == 1)
     read -> var;
-    print -> var;
     main = 0;
 endwhile;
