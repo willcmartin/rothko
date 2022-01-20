@@ -13,20 +13,24 @@ class Node():
         self.right = None # node
         self.data = None # token
         self.left = None # node
+    def __repr__(self):
+        return self.data.val
 
 class Compound():
     def __init__(self):
-        self.data = Token("COMPOUND", "None")
+        self.data = Token("COMPOUND", "loop")
         self.children = []
+    def __repr__(self):
+        return self.data.val
 
 
 def parse(token_stream):
 
     def build_ast(node, left=False):
         if tokens.curr.type in ["SEPERATOR"]:
-            if tokens.curr.val in (";", ")"):
+            if tokens.curr.val in [";", ")"]:
                 return node
-            elif tokens.curr.val in ("(", "->"):
+            elif tokens.curr.val in ["(", "->"]:
                 tokens.get_next()
                 return build_ast(node, left=True)
         elif tokens.curr.type in ["INTEGER", "IDENTIFIER"]:

@@ -51,8 +51,51 @@ def evaluate(ast, env):
             for child in ast.children:
                 evaluate_ast(child)
 
+    def print_ast(ast, lines=set(), level=0, fork=False):
+        """print utility for ast"""
+
+        # base case
+        if ast.data.val == None:
+            return
+
+        # printing
+        tree_str = ""
+        if level != 0:
+            tree_str = ""
+            for l in range(level-1):
+                if l in lines:
+                    tree_str += "│  "
+                else:
+                    tree_str += "   "
+            if fork:
+                tree_str +="├── "
+                lines.add(level-1)
+            else:
+                tree_str += "└── "
+                lines.discard(level-1)
+        print(tree_str + str(ast))
+
+        # recursive cases
+        if ast.data.type == "COMPOUND":
+            for i, child in enumerate(ast.children):
+                if i < (len(ast.children) - 1):
+                    print_ast(child, lines, level+1, True)
+                else:
+                    print_ast(child, lines, level+1, False)
+        else:
+            if ast.left != None and ast.right != None:
+                print_ast(ast.left, lines, level+1, True)
+                print_ast(ast.right, lines, level+1, False)
+            elif ast.left != None:
+                print_ast(ast.left, lines, level+1, False)
+            elif ast.right != None:
+                print_ast(ast.right, lines, level+1, False)
+
     # intialize main = 1
     env.set("main", 1)
 
     # call evaluator on ast
     evaluate_ast(ast)
+
+    # print ast for debugging
+    print_ast(ast)
