@@ -15,4 +15,4 @@ class stream():
         try:
             self.next = next(self.generator)
         except StopIteration:
-            self.next = None
+            self.next = None    

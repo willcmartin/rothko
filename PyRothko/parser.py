@@ -28,7 +28,13 @@ def parse(token_stream):
 
     def build_ast(node, left=False):
         if tokens.curr.type in ["SEPERATOR"]:
-            if tokens.curr.val in [";", ")"]:
+            if tokens.curr.val in [")"]:
+                if node.data.type in ["CONDITION"]:
+                    return node
+                else:
+                    tokens.get_next()
+                    return build_ast(node, left=True)
+            elif tokens.curr.val in [";"]:
                 return node
             elif tokens.curr.val in ["(", "->"]:
                 tokens.get_next()
@@ -36,7 +42,7 @@ def parse(token_stream):
         elif tokens.curr.type in ["INTEGER", "IDENTIFIER"]:
             node.data = tokens.curr
             tokens.get_next()
-            if left==True:
+            if left == True:
                 return build_ast(node)
             else:
                 return node
