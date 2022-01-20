@@ -98,4 +98,4 @@ def evaluate(ast, env):
     evaluate_ast(ast)
 
     # print ast for debugging
-    print_ast(ast)
+    # print_ast(ast)
