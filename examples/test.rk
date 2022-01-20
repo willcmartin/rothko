@@ -1,5 +1,5 @@
 while (main == 1)
-    n = (2 + 9) * 10;
-    print -> n;
+    read -> n;
+    print -> n+1;
     main = 0;
 endwhile;

@@ -16,8 +16,8 @@ def evaluate(ast, env):
         elif ast.data.val == "printascii":
             print(chr(evaluate_ast(ast.left)))
         elif ast.data.val == "read":
-            env.set(evaluate_ast(ast.left, val=False), int(input()))
-            print(chr(evaluate_ast(ast.left)))
+            env.add(evaluate_ast(ast.left, val=False), int(input()))
+            print(chr(evaluate_ast(ast.left))) # TODO: is this needed?
         elif ast.data.type == "CONDITION":
             if ast.data.val == "==":
                 return (evaluate_ast(ast.left) == evaluate_ast(ast.right))
@@ -31,7 +31,7 @@ def evaluate(ast, env):
                 return (evaluate_ast(ast.left) <= evaluate_ast(ast.right))
         elif ast.data.type == "OPERATOR":
             if ast.data.val == "=":
-                env.set(evaluate_ast(ast.left, val=False), evaluate_ast(ast.right))
+                env.add(evaluate_ast(ast.left, val=False), evaluate_ast(ast.right))
             elif ast.data.val == "+":
                 return int(evaluate_ast(ast.left)) + int(evaluate_ast(ast.right))
             elif ast.data.val == "-":
@@ -41,8 +41,8 @@ def evaluate(ast, env):
             elif ast.data.val == "/":
                 return int(evaluate_ast(ast.left)) // int(evaluate_ast(ast.right))
         elif ast.data.type == "IDENTIFIER":
-            if val==True:
-                return env.items[ast.data.val]
+            if val == True:
+                return env.get(ast.data.val)
             else:
                 return ast.data.val
         elif ast.data.type == "INTEGER":
@@ -92,10 +92,12 @@ def evaluate(ast, env):
                 print_ast(ast.right, lines, level+1, False)
 
     # intialize main = 1
-    env.set("main", 1)
+    env.add("main", 1)
 
     # call evaluator on ast
     evaluate_ast(ast)
 
     # print ast for debugging
     print_ast(ast)
+
+    # print(env)
