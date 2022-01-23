@@ -34,9 +34,15 @@ def parse(token_stream):
                 else:
                     tokens.get_next()
                     return build_ast(node, left=True)
+            elif tokens.curr.val in ["]"]:
+                if node.data.type in ["INTEGER", "OPERATOR", "IDENTIFIER"]:
+                    return node
+                else:
+                    tokens.get_next()
+                    return build_ast(node, left=True)
             elif tokens.curr.val in [";"]:
                 return node
-            elif tokens.curr.val in ["(", "->"]:
+            elif tokens.curr.val in ["(", "->", "["]: # TODO: make all "in" statements match
                 tokens.get_next()
                 return build_ast(node, left=True)
         elif tokens.curr.type in ["INTEGER", "IDENTIFIER"]:
@@ -56,7 +62,7 @@ def parse(token_stream):
                 return build_ast(parent_node)
             else:
                 tokens.get_next()
-                parent_node.right = build_ast(Node())
+                parent_node.right = build_ast(Node()) # left = True?
                 return build_ast(parent_node)
         elif tokens.curr.type in ["KEYWORD"]:
             if tokens.curr.val in ["while"]:
@@ -77,6 +83,15 @@ def parse(token_stream):
             elif tokens.curr.val in ["endwhile"]:
                 tokens.get_next()
                 return build_ast(node, left=True)
+            elif tokens.curr.val in ["tape"]:
+                node.data = tokens.curr
+                tokens.get_next()
+                node.left = build_ast(Node())
+                if left == True:
+                    return build_ast(node)
+                else:
+                    return node
+
         else:
             raise Exception("The token type \"" + tokens.curr.type + "\" is not allowed by the parser.")
 

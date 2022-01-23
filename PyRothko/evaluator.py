@@ -5,6 +5,9 @@ traverses the ast and carries out the program
 while assigning values in the environment
 """
 
+import random
+import string
+
 def evaluate(ast, env):
 
     def evaluate_ast(ast, val=True):
@@ -16,8 +19,13 @@ def evaluate(ast, env):
         elif ast.data.val == "printascii":
             print(chr(evaluate_ast(ast.left)))
         elif ast.data.val == "read":
-            env.add(evaluate_ast(ast.left, val=False), int(input()))
+            env.set(evaluate_ast(ast.left, val=False), int(input()))
             print(chr(evaluate_ast(ast.left))) # TODO: is this needed?
+        elif ast.data.val == "tape":
+            if val == True:
+                return env.read_tape(evaluate_ast(ast.left))
+            else:
+                return 'tapeidx_' + str(evaluate_ast(ast.left))
         elif ast.data.type == "CONDITION":
             if ast.data.val == "==":
                 return (evaluate_ast(ast.left) == evaluate_ast(ast.right))
@@ -31,7 +39,7 @@ def evaluate(ast, env):
                 return (evaluate_ast(ast.left) <= evaluate_ast(ast.right))
         elif ast.data.type == "OPERATOR":
             if ast.data.val == "=":
-                env.add(evaluate_ast(ast.left, val=False), evaluate_ast(ast.right))
+                env.set(evaluate_ast(ast.left, val=False), evaluate_ast(ast.right))
             elif ast.data.val == "+":
                 return int(evaluate_ast(ast.left)) + int(evaluate_ast(ast.right))
             elif ast.data.val == "-":
@@ -68,7 +76,7 @@ def evaluate(ast, env):
                 else:
                     tree_str += "   "
             if fork:
-                tree_str +="├── "
+                tree_str += "├── "
                 lines.add(level-1)
             else:
                 tree_str += "└── "
@@ -92,12 +100,13 @@ def evaluate(ast, env):
                 print_ast(ast.right, lines, level+1, False)
 
     # intialize main = 1
-    env.add("main", 1)
+    env.set("main", 1)
+
+    # print ast for debugging
+    # print_ast(ast)
 
     # call evaluator on ast
     evaluate_ast(ast)
 
-    # print ast for debugging
-    print_ast(ast)
-
-    # print(env)
+    # print tape for debugging
+    # print("tape: ", env)
