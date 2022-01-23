@@ -1,4 +1,4 @@
-while (main == 1)
+while (main == 1) {
     tape[1] = 64;
     tape[2] = 34;
     tape[3] = 25;
@@ -7,25 +7,24 @@ while (main == 1)
     tape[6] = 90;
 
     i = 1;
-    while (i < 7)
+    while (i < 7) {
         j = 1;
-        j_max = 7-i-1;
-        while (j < j_max)
-            while (tape[j] > tape[j+1])
+        while (j < (7-i-1)) {
+            while (tape[j] > tape[j+1]);
                 temp_var = tape[j];
                 tape[j] = tape[j+1];
                 tape[j+1] = temp_var;
-            endwhile;
+            }
             j = j + 1;
-        endwhile;
+        }
         i = i + 1;
-    endwhile;
+    }
 
     print_loop_cnt = 1;
-    while (print_loop_cnt < 7)
+    while (print_loop_cnt < 7) {
         print -> tape[print_loop_cnt];
         print_loop_cnt = print_loop_cnt + 1;
-    endwhile;
+    }
 
     main = 0;
-endwhile;
+}

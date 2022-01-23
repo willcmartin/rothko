@@ -103,7 +103,7 @@ def evaluate(ast, env):
     env.set("main", 1)
 
     # print ast for debugging
-    # print_ast(ast)
+    print_ast(ast)
 
     # call evaluator on ast
     evaluate_ast(ast)

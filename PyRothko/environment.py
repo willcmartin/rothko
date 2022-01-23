@@ -8,15 +8,10 @@ class Item():
     def __init__(self, name):
         self.name = name
         self.val = None
-        # self.next = None
     def set_val(self, val):
         self.val = val
     def get_val(self):
         return self.val
-    # def set_next(self, next):
-    #     self.next = next
-    # def get_next(self):
-    #     return self.next
     def __repr__(self):
         return "(Name: " + self.name + ", Value: " + str(self.val) + ")" # TODO: print next
 

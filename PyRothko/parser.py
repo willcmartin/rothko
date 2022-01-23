@@ -30,6 +30,7 @@ def parse(token_stream):
         if tokens.curr.type in ["SEPERATOR"]:
             if tokens.curr.val in [")"]:
                 if node.data.type in ["CONDITION"]:
+                    print(node.data.val)
                     return node
                 else:
                     tokens.get_next()
@@ -40,7 +41,7 @@ def parse(token_stream):
                 else:
                     tokens.get_next()
                     return build_ast(node, left=True)
-            elif tokens.curr.val in [";"]:
+            elif tokens.curr.val in [";", "{", "}"]:
                 return node
             elif tokens.curr.val in ["(", "->", "["]: # TODO: make all "in" statements match
                 tokens.get_next()
@@ -56,13 +57,13 @@ def parse(token_stream):
             parent_node = Node()
             parent_node.left = node
             parent_node.data = tokens.curr
-            if tokens.curr.val in ["="]:
+            if tokens.curr.val in ["=", "==", "<", ">"]:
                 tokens.get_next()
                 parent_node.right = build_ast(Node(), left=True)
                 return build_ast(parent_node)
             else:
                 tokens.get_next()
-                parent_node.right = build_ast(Node()) # left = True?
+                parent_node.right = build_ast(Node()) # , left=True)
                 return build_ast(parent_node)
         elif tokens.curr.type in ["KEYWORD"]:
             if tokens.curr.val in ["while"]:
@@ -71,7 +72,7 @@ def parse(token_stream):
                 node.left = build_ast(Node(), left=True)
                 node.right = Compound()
                 tokens.get_next()
-                while tokens.curr.val != "endwhile":
+                while tokens.curr.val != "}":
                     node.right.children.append(build_ast(Node(), left=True))
                     tokens.get_next()
                 return build_ast(node)
@@ -80,9 +81,6 @@ def parse(token_stream):
                 tokens.get_next()
                 node.left = build_ast(Node())
                 return build_ast(node)
-            elif tokens.curr.val in ["endwhile"]:
-                tokens.get_next()
-                return build_ast(node, left=True)
             elif tokens.curr.val in ["tape"]:
                 node.data = tokens.curr
                 tokens.get_next()
